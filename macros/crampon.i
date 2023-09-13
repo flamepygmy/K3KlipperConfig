@@ -7,7 +7,7 @@ cs_pin: crampon:CS
 [resonance_tester]
 accel_chip: adxl345
 probe_points: 90, 90, 20
-accel_per_hz: 130
+accel_per_hz: 250
 max_freq: 125
   
   
