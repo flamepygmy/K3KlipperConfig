@@ -1,0 +1,23 @@
+We are following the Klipper one on this one: https://www.klipper3d.org/Pressure_Advance.html with a twist
+
+  1. set the 'pressure_advance_smooth_time' to what should be roughly proper for your extruder prior to testing
+  2. for example for sherpa micro, I use 0.01, DFA should be something like 0.017-0.020, YMMV
+  3. follow the instructions on Klipper website, but DO NOT issue the SET_VELOCITY_LIMIT command
+  4. instead we print at close to regular intended print speeds (for example 200mm/s) and
+     already calibrated acceleration values from input shaper tuning
+  5. issue
+     TUNING_TOWER COMMAND=SET_PRESSURE_ADVANCE PARAMETER=ADVANCE START=0 FACTOR=.005
+  6. set layer height to 0.75% of nozzle width (for 0.5mm nozzle 0.375mm)
+  7. set infill to 0%
+  8. the rest of it we follow the Klipper documentation
+  9. set the pressure_advance custom GCODE to the slicer for this specific filament as the value can be
+     different from filament to other:
+         SET_PRESSURE_ADVANCE ADVANCE=<best value>
+
+  9. set also the smooth time for ALL filaments as some filaments may use something else:
+         SET_PRESSURE_ADVANCE SMOOTH_TIME=<value>
+
+       for example for TPU or some such you may have to use a different value possibly here
+       
+      
+        

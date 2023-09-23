@@ -1,0 +1,18 @@
+Assuming *nothing* is calibrated except perhaps homing, then this is the order of things:
+
+  1. extruder steps calibration
+  2. input shaper calibration with accelerometer
+  3. calibrating flow for at least ONE filament using the first layer 'squish' independent method
+
+Once we have at least one properly flow calibrated filament, we can calibrate proper first layer squish.
+
+Per build plate (beacon):
+  4. beacon calibration
+  5. calibrating first layer 'squish'
+
+Per filament (for other filaments):
+  (6). calibrating flow (prefer still the 'squish' independent method), see (3)
+  (7). verifying first layer 'squish' (note: THIS should be filament independent assuming flow is correct), see (5).
+       we do this step just to verify that nothing changed with this.. shouldnt' have
+  8. calibrating pressure advance
+  9. shrinking calibration

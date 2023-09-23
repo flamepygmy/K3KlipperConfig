@@ -1,0 +1,38 @@
+Use the 'Ellis' method as it allows for first layer-squish independent calibration of the flow from the TOP surface.
+
+https://ellis3dp.com/Print-Tuning-Guide/articles/extrusion_multiplier.html
+
+ 1. set extrusion multiplier (EM) to 1.0 for filament
+ 2. slice a 30x30x3mm cube
+ 3. set infill to 30%
+ 4. top layer line width = nozzle diameter
+ 5. preferably forced nozzle diameter everywhere for line width
+ 6. layer height = 0.2
+ 7. bottom layers = 2 (these are used to establish the print on the bed, they don't have to look good!)
+ 8. top layers = say around 10 or so, as long as there are at least 2-3 infill layers after the bottom layers, the infill
+    acts as a separator between the bottom first layer 'squish' issues vs. proper infill. Any first layer issues shouldn't
+    be propagated high up.
+ 9. top infill pattern = monotonic
+ 10. ironing disabled
+ 11. solid infill speed = somewhat regular print speed, but if pressure advance not calibrated yet,
+     don't probably want to push it super fast
+ 12. top solid infill speed = lowish setting like 60mm/s to avoid speed affecting the flow results too much
+ 13. minimum layer time = 0
+ 14. fan speed = highish to make sure that there is enough cooling (assuming filament is OK with this)
+
+ 15. we start with initial 'stepping' value of 0.05, and initial EM = 1.0
+ 16. slice cube with EM
+ 17. investigate top quality, IGNORE bottom quality
+ 18. if we have clearly overextrusion, our next EM is going to be at EM-stepping = 1.0 - 0.05 = 0.095
+ 19. if we have clearly underextrusion, we go EM = 1.0 + 0.05
+ 20. we continue 16-19 until we have found our under/over extrusion bound (that is, we were for example
+     reducing EM ... then we hit clear under-extrusion)
+
+ 21. after above steps we should now have a knowledge that the optimal EM is between the last to EM values
+ 22. set EM = 0.5 * (last_EM + second_to_last_EM) .. that is in-between
+ 23. print that
+ 24. now we have another sample, if it's underextruding, then we pick a NEW sample half-way between the
+     last overextruding and this sample and go in-between
+ 25. if overextruding we pick a new sample half-way between the last underextruding and this sample
+ 26. we continue this (binary search) until we have narrowed down to a value that's just right
+

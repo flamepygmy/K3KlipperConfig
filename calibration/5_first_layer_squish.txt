@@ -1,0 +1,32 @@
+We are using the Ellis / Prusa method here.
+
+https://ellis3dp.com/Print-Tuning-Guide/articles/first_layer_squish.html
+
+  1. set extrusion width to 120% of your nozzle width
+  2. set layer height to 0.20 (beacon -> we should be able to rely on this)
+  3. add a cube of 20x20x0.25 size
+  4. set instance count to 9
+  5. set the arrange distance to something that keeps a good distance between the 'cubes'
+  6. arrange the cubes (should cover most of the bed)
+  7. set print speeds to something reasonable like 60mm/s
+  8. cooling can be turned off
+  9. use traditional slicing (do not use arachne or other dynamic line width methods)
+
+  10. start the print (usual pre-print stuff should be done like z_tilt_adjust, bed_mesh_calibrate prior)
+  11. as the printer is printing the flat cubes, inspect the results and adjust the Z offset from
+      the interface (Fluidd, MainSail) to optimize result
+  12. if best result not yet found, goto (9)
+
+ The best result is where the lines are still visible, but there are no gaps between them. There should
+ be no 'lifted' pieces where there is too much squish and the filament near the edges start to 'push up'.
+
+ There can be small gaps near the edges as those are hard to fill *exactly* unless using arachne or other
+ variable line-width stuff. In terms of lines we are mostly concerned near the center. For the 'push up'
+ we are interested anywhere as that's a sign of too much squishing and the filament is climbing over other
+ lines/areas.
+
+ Once we have the Z-offset, record that and it should be saved into the 'model_offset' of the saved beacon
+ config for that specific plate/thermal combination. First layer squish should be done for each config
+ separately.
+
+  

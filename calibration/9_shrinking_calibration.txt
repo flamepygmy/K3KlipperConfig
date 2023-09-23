@@ -1,0 +1,11 @@
+
+ If parts have been created already with built-in shrink compensation, then these values should not be used.
+ If however you are trying to print 1:1 to a model, then shrink compensation may have to be used.
+
+ 1. print a largeish cube in X-Y, but it doesn't need to be super tall (say 100x100x5)
+ 2. wait it to fully cool down
+ 3. measure the dimensions in X-Y vs. what they should be
+ 4. if printed size is 100x100 for example and they measure 98.5x98.5, then you have to apply
+    scale in X-Y direction in slicer of 100/98.5 in X and Y direction to compensate for the shrinkage
+   
+ 

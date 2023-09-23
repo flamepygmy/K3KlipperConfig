@@ -1,0 +1,41 @@
+Getting this exactly right is not SUPER important, because filament flow calibration can be used to offset
+results, BUT if the results are not accurate and you swap say extruders, then suddenly all your filament
+flow calibration results are now suspect to being off if they were calibrated vs. extruder steps that
+weren't exactly right.
+
+Do this with your cheapest filament :-)
+
+ 1. set the 'full_steps_per_rotation' correctly for the motor, 200 for 1.8 and 400 for 0.9
+ 2. set the correct 'gear_ratio', for example sherpa mini 8t is 50:8
+ 3. set the desired 'microsteps' value for example 16
+ 4. set initial 'rotation_distance' if you know it from:
+
+      rotation_distance = <full_steps_per_rotation> * <microsteps> / <steps_per_mm>
+
+ 5. restart klipper
+
+ 6. move the bed as low as possible
+ 7. remove nozzle
+ 8. extrude enough filament so that they come outside of the bottom part of the extruder
+ 9. cut the filament as flush with the base of the hotend as possible
+ 10. extrude 500mm of filament, gently guide it so that it doesn't snag anywhere
+
+     M83
+     G92 E0.0
+     G1 E500 F350
+
+11. cut the filament as flush with the base of the hotend as possible
+ 12. measure the length of the filament as accurately as possible -> filament_meas
+ 13. calculate new rotation_distance with formula:
+
+    rotation_distance = original_rotation_distance * filament_meas / 500
+
+ 14. if (filament_meas / 500) equals very close to 1.0, at some point you have to make a decision
+    to stop the process -> stop
+
+ 15. set the new rotation_distance into the klipper config
+ 16. restart klipper
+ 17. goto (10) (filament already cut flush)
+
+
+ 

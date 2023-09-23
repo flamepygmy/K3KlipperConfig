@@ -1,0 +1,26 @@
+Follow the beacon calibration flow with some specific twists:
+
+  1. set 'cal_nozzle_z' to 0.2 in [beacon]
+  2. restart Klipper
+  3. use 0.2mm feeler gauge for the test, make sure that you have just one of the feeler gauges or not accidentally stacked 2 for example
+  4. run beacon calibrate against the feeler gauge
+  5. what we are searching for is the very first Z position where you hear 'tick tick tick' as you slide the feeler gauge under the
+     nozzle
+  6. to that end we move the nozzle closer and closer, when we hear the ticking sound we move down to higher resolution stepping and move the bed
+     further away from the nozzle
+  7. once we hear no sound again, we move next higher resolution stepping (smaller step value) and goto (6)
+
+  Once we are at the highest resolution of movement, we want to find the Z offset where the sound is not heard and then by moving
+  the bed closer with the highest resolution step you start to hear the sound... then that's your calibrated position (the one giving the
+  sound).
+
+  This way, we have a standard way of doing this always more or less the same way assuming the bed is relatively level to begin with
+  AND the bed doesn't have debris on it.
+
+  If this is first calibratiobn ever, it may be required to do this first, then running z_tilt_adjust to level the bed and calibrate
+  AGAIN, but now with level bed. If the bed is at the tilt, then there is slight Z offset between what beacon is measuring and at which
+  height the nozzle is.
+
+  This one we save to the config.
+
+  Note: this is not the proper 'squish' value yet, but it's usually quite close and atleast somewhat usable directly.
